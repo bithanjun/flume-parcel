@@ -54,8 +54,6 @@ done
 java -jar $VALIDATOR_DIR/validator/target/validator.jar \
   -d $PARCEL_NAME
 
- # http://superuser.com/questions/61185/why-do-i-get-files-like-foo-in-my-tarball-on-os-x
-export COPYFILE_DISABLE=true
 
 # create parcel
 tar zcvf ${PARCEL_NAME}-el7.parcel ${PARCEL_NAME}
