@@ -1,0 +1,74 @@
+{
+	"name": "FLUME19",
+	"label": "Flume19",
+	"description": "Apache Flume service",
+	"version": 1,
+	"runAs": {
+		"user": "root",
+		"group": "root"
+	},
+	"compatibility": {
+		"generation": 1,
+		"cdhVersion": {
+			"min": 5
+		}
+	},
+	"parcel": {
+		"requiredTags": ["cdh"]
+	},
+	"serviceDependencies": [
+	{
+		"name": "HDFS",
+		"required": "false"
+	},
+	{
+		"name": "HBASE",
+		"required": "false"
+	}],
+	"roles": [
+	{
+		"name": "FLUME_AGENT",
+		"label": "flume agent",
+		"pluralLabel": "flume agent",
+		"jvmBased": true,
+		"startRunner": {
+			"program": "scripts/control.sh",
+			"args": ["start"],
+			"environmentVariables" : {
+		       "agent_name" : "${agent_name}"
+		      }
+		},
+		"stopRunner": {
+			"timeout": "90000",
+			"runner": {
+				"program": "scripts/control.sh",
+				"args": ["stop"]
+			}
+		},
+		"logging": {
+	        "dir": "/var/log/flume",
+	        "filename": "flume.log",
+	        "modifiable": true,
+	        "loggingType": "log4j"
+	    },
+		"configWriter" : {
+		    "generators" : [
+		      {
+		        "filename" : "flume.conf",
+		        "configFormat" : "properties",
+		        "excludedParams" : ["log_dir", "agent_name"]
+		      }
+		    ]
+	  	},
+		"parameters": [
+		{
+			"name": "agent_name",
+			"label": "Agent Name",
+			"description": "Used to select an agent configuration to use from flume.conf. Multiple agents can share the same agent name, in which case they are assigned the same agent configuration.",
+			"type": "string",
+			"default":"tier1"
+		}
+		]
+	}
+	]
+}

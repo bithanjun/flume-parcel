@@ -1,0 +1,11 @@
+{
+    "parcels": [
+        {
+            "hash": "efb4238470a77a412d795248d954437144a7a767",
+            "depends": "CDH (>= 5.0)",
+            "parcelName": "FLUME-1.9.1.flume.p0.1-el7.parcel",
+            "components": []
+        }
+    ],
+    "lastUpdated": 1597813352432
+}
